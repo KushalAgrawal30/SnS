@@ -57,7 +57,7 @@ const Login = () => {
         console.log('Success:', data);
         // Navigate to the upload page if login is successful
         if (data.success) {
-          navigate('/upload');
+          navigate('/homescreen');
         } else {
           setError('Invalid login credentials.');
         }

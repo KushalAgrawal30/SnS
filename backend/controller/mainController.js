@@ -6,11 +6,15 @@ const { Product } = require('../model/model')
 const { User } = require('../model/model')
 const { Notify } = require('../model/model')
 const { Login } = require('../model/model')
+const session = require('express-session')
+const bodyParser = require('body-parser')
+
 
 const IMGBB_API_KEY = "8a496163927b9d9e0480e2850c8f8047";
 const GOOGLE_API_KEY = "e46eb16e06b86f316f7c4fcb0059c24f949e1cec889d9dcbdfc087f140452d40"
 
 let emailValue;
+
 
 exports.createUser = async (req,res) =>  {
     const data = req.body.userData 
@@ -34,7 +38,10 @@ exports.createUser = async (req,res) =>  {
         }
         
     }catch(err){
-        
+        console.log(`Error in create user`)
+        res.status(400).json({
+            success : false
+        })
     }
     
 }
@@ -52,6 +59,8 @@ exports.loginUser = async (req,res) => {
        }
        else{
         if(req.body.password == check.password){
+            req.session.loggedIn = true;
+            req.session.username = req.body.email
             console.log(`Logged in as ${check.email}`)
             res.status(200).json({
                 success : true,
