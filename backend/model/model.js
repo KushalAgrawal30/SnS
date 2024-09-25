@@ -9,7 +9,13 @@ const productsSchema = new mongoose.Schema({
 })
 
 const LoginSchema = new mongoose.Schema({
-    mail : {
+    name: {
+        type : String,
+        required : true
+    },
+    gender : String,
+    age : Number,
+    email : {
         type : String,
         required : true
     },

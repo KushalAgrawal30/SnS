@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import "./CreateAccount.css";
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const CreateAccount = () => {
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
   const [showProfile, setShowProfile] = useState(false);
   const [userData, setUserData] = useState({
     name: '',
@@ -18,17 +21,35 @@ const CreateAccount = () => {
     if (userData.name && userData.gender && userData.age && userData.email && userData.password && confirmPassword) {
       if (userData.password === confirmPassword) {
         setShowProfile(true);
+        fetch('http://localhost:8000/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userData }), // Send email and password
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Success:', data);
+            // Navigate to the upload page if login is successful
+            if (data.success) {
+              navigate('/');
+            } else {
+              setError(data.message);
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            setError('An error occurred. Please try again.');
+          });
       } else {
         alert('Passwords do not match');
       }
     } else {
       alert('Please fill in all fields');
     }
-  };
 
-  if (showProfile) {
-    return <ProfilePage userData={userData} />;
-  }
+  };
 
   return (
     <div className="create-account-container">
@@ -64,6 +85,7 @@ const CreateAccount = () => {
         placeholder="Confirm Password..."
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
+      {error && <p className="error-message">{error}</p>}
       <button className="create-account-button" onClick={handleCreateAccount}>
         <img src="/path_to_svg/create-account.svg" alt="Create Account" />
       </button>

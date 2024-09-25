@@ -13,49 +13,63 @@ const GOOGLE_API_KEY = "e46eb16e06b86f316f7c4fcb0059c24f949e1cec889d9dcbdfc087f1
 let emailValue;
 
 exports.createUser = async (req,res) =>  {
-    const data = { 
-        mail : req.body.mail, 
-        password : req.body.password
+    const data = req.body.userData 
+    console.log(data)
+    try{
+        const existingUser = await Login.findOne({email:data.email})
+        if(existingUser){
+            console.log("User already exits")
+            res.status(400).json({
+                success : false,
+                message : "User Already exist"
+            })
+        }
+        else{
+            const userdata = await Login.insertMany(data);
+            console.log("User created",userdata) 
+            res.status(200).json({
+                success : true,
+                message : "User Created"
+            })
+        }
+        
+    }catch(err){
+        
     }
-
-    const existingUser = await Login.findOne({mail:req.body.mail})
-    if(existingUser){
-        res.send("User Already Exist")
-    }
-    else{
-        res.send("Signed Up")
-        const userdata = await Login.insertMany(data);
-        console.log(userdata) 
-    }
+    
 }
 
 exports.loginUser = async (req,res) => {
     console.log(req.body)
-    console.log(req.body.email)
     try{
-       const check = await Login.findOne({mail:req.body.email})
+       const check = await Login.findOne({email:req.body.email})
        console.log(check.password, req.body.password)
        if(!check){
-        res.send("User not found")
-       } 
-       if(req.body.password == check.password){
-        console.log(`Logged in as ${check.mail}`)
-        res.status(200).json({
-            success : true,
-            message : "Loged In"
+        return res.status(400).json({
+            success : false,
+            message : "User Dont exist"
         })
        }
        else{
-        console.log(`Wrong password`)
-        res.status(400).json({
-            success : false,
-            message : "Wrong Password"
-        })
-       }
+        if(req.body.password == check.password){
+            console.log(`Logged in as ${check.email}`)
+            res.status(200).json({
+                success : true,
+                message : "Loged In"
+            })
+           }
+           else{
+            console.log(`Wrong password`)
+            res.status(400).json({
+                success : false,
+                message : "Wrong Password"
+            })
+           }
+       } 
     }catch(err){
         console.log(`Wrong details`)
         res.status(400).json({
-            success : "Fail"
+            success : false
         })
     }
 } 
