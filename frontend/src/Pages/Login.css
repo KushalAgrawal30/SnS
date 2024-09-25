@@ -1,8 +1,3 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #111;
-}
-
 .login-container {
     position: relative;
     height: 100vh;
@@ -12,15 +7,25 @@ body {
     justify-content: center;
 }
 
-.background-logo {
+.login-container::before {
+    content: '';
     position: absolute;
-    background-image: url('../Components/logo.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.4;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    background-image: url('../Components/logo.png');
+    background-size: 50%; /* Adjust to cover the desired area */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent image from repeating */
+    opacity: 0.5; /* Set the opacity of the background image */
+    z-index: -1; /* Ensure the image is behind the content */
+}
+
+/* Ensure that all content stays above the background image */
+h2, .login-input, .login-button, .create-account {
+    position: relative;
+    z-index: 1;
 }
 
 h2 {
@@ -44,6 +49,22 @@ h2 {
 
 .login-input::placeholder {
     color: rgba(255, 255, 255, 0.6);
+}
+
+/* Button styles */
+.login-button {
+    width: 180px;
+    height: 70px;
+    background-image: url('../Components/button1.png');
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    transition: background-image 0.2s ease;
+    padding-right: 35px;
+}
+
+.login-button:hover {
+    background-image: url('../Components/button2.png');
 }
 
 .create-account {

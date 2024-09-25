@@ -80,14 +80,15 @@ const Login = () => {
       />
       {error && <p className="error-message">{error}</p>}
       <br />
-      <button
-        onClick={handleSubmit}
-        disabled={!email || !validateEmail(email) || password.length < 6}
-      >
-        Get Started
-      </button>
+      
+      {/* Replace button with a div styled as a button */}
+      <div 
+        className="login-button" 
+        onClick={handleSubmit} 
+      />
+      
       <br />
-      <Link to="./CreateAccount" className="create-account">Create Account Link</Link>
+      <Link to="./CreateAccount" className="create-account">Create Account</Link>
     </div>
   );
 };
