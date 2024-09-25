@@ -11,7 +11,9 @@
   "dependencies": {
     "@google-cloud/vision": "^4.3.2",
     "axios": "^1.7.7",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
+    "ejs": "^3.1.10",
     "express": "^4.21.0",
     "formidable": "^3.5.1",
     "mongoose": "^8.6.3",
