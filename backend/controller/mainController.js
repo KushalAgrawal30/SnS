@@ -30,8 +30,10 @@ exports.createUser = async (req,res) =>  {
 }
 
 exports.loginUser = async (req,res) => {
+    console.log(req.body)
+    console.log(req.body.email)
     try{
-       const check = await Login.findOne({mail:req.body.mail})
+       const check = await Login.findOne({mail:req.body.email})
        console.log(check.password, req.body.password)
        if(!check){
         res.send("User not found")
@@ -39,21 +41,21 @@ exports.loginUser = async (req,res) => {
        if(req.body.password == check.password){
         console.log(`Logged in as ${check.mail}`)
         res.status(200).json({
-            status : "success",
+            success : true,
             message : "Loged In"
         })
        }
        else{
         console.log(`Wrong password`)
         res.status(400).json({
-            status : "Fail",
+            success : false,
             message : "Wrong Password"
         })
        }
     }catch(err){
         console.log(`Wrong details`)
         res.status(400).json({
-            status : "Fail"
+            success : "Fail"
         })
     }
 } 
