@@ -135,6 +135,37 @@ exports.getImage = async (req,res) => {
          console.log(googleLensResults)
          console.log(prodTitle)
 
+         const shoppingResults = await new Promise((resolve, reject) => {
+            getJson(
+              {
+                engine: "google_shopping",
+                q: googleLensResults.title,
+                api_key: GOOGLE_API_KEY,
+                gl:"in"
+              },
+              (json) => {
+                if (json) {
+                  resolve(json.shopping_results.slice(0,5));
+                } else {
+                  reject(new Error('No visual matches found in Google Lens.'));
+                }
+              }
+            );
+          });
+
+          const num = []
+          for(let i=0;i<5;i++){
+            const newProduct = await Product.create({
+                title : shoppingResults[i].title.slice(0,12),
+                prodURL : shoppingResults[i].link,
+                price : shoppingResults[i].price,
+                imgUrl : shoppingResults[i].thumbnail
+            })
+            num.push(newProduct._id.toString())
+          }
+          console.log(num)
+
+
      } catch (err) {
          // example to check for a very specific error
          console.error(err);
@@ -142,7 +173,4 @@ exports.getImage = async (req,res) => {
          res.end(String(err));
          return;
      }    
-
-
-
 }
