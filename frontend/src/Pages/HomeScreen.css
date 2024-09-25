@@ -121,3 +121,25 @@ body {
   .sidebar li:hover {
     background-color: #222;
   }
+  /* HomeScreen.css */
+.confirm-container {
+    position: relative;
+    /* Add any other styles you need */
+  }
+  
+  .image-preview {
+    width: 100%; /* Adjust width as needed */
+    height: 300px; /* Fixed height for the preview box */
+    overflow: hidden; /* Hide overflow to keep the preview box clean */
+    display: flex;
+    justify-content: center; /* Center align the image */
+    align-items: center; /* Center align the image */
+    border: 2px dashed #ccc; /* Optional: Add a border for visibility */
+  }
+  
+  .image-preview img {
+    max-width: 100%; /* Scale down to fit the box */
+    max-height: 100%; /* Scale down to fit the box */
+    object-fit: cover; /* Ensure the image covers the area while maintaining aspect ratio */
+  }
+  
