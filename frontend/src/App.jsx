@@ -4,6 +4,7 @@ import './App.css';
 import Login from './Pages/Login';
 import CreateAccount from './Pages/CreateAccount';
 import ConfirmScreen from './Pages/ConfirmScreen';
+import ProductListingPage from './Pages/ProductListingPage';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ function App() {
           <Route path='/CreateAccount' element={<CreateAccount/>}/>
           <Route path='/HomeScreen' element = {<HomeScreen/>}/>
           <Route path='/ConfirmScreen' element = {<ConfirmScreen/>}/>
+          <Route path='/ProductListingPage' element = {<ProductListingPage/>}/>
           
         </Routes>
       </Router>

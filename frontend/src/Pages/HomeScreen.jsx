@@ -39,7 +39,9 @@ const HomeScreen = () => {
 
   return (
     <div className="home-container">
-      <div className="background-logo"></div>
+      <div className="background-logo">
+        
+      </div>
       <header className="header">
         <h2>Ready to take a snapshot?...</h2>
       </header>
