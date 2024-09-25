@@ -50,6 +50,7 @@ const Login = () => {
         className="txt-input"
       />
       {/* Input for Password */}
+      <br />
       <input
         type="password"
         placeholder="Enter Password"

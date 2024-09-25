@@ -10,7 +10,7 @@ function App() {
       <Router>
         <Routes>
           {/* Route to render Login component on the root ("/") path */}
-          <Route index element={<Login />} />
+          <Route path='/Login' element={<Login />} />
         </Routes>
       </Router>
     </div>
