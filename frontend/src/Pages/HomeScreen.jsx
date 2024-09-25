@@ -71,7 +71,7 @@ const HomeScreen = () => {
           </div>
 
           {/* Confirm Button */}
-          <button onClick={} className="confirm-button">
+          <button className="confirm-button">
             <img
               src="../Components/confirm1.png"
               alt="Confirm Button"
