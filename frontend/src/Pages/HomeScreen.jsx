@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './HomeScreen.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 const HomeScreen = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -15,7 +16,6 @@ const HomeScreen = () => {
 
   const handleLogout = () => {
     console.log('Logged Out');
-    navigate('/');
   };
 
   const handleImageUpload = (event) => {
@@ -23,9 +23,17 @@ const HomeScreen = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result);
+        setImage(reader.result);  
         setIsConfirming(true); // Show the confirm screen
       };
+      const formdata = new FormData();
+      formdata.append('image', file);
+      const response = axios.post('http://localhost:8000/upload', formdata, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+      });
+      console.log(response)
       reader.readAsDataURL(file);
     }
   };
@@ -63,7 +71,7 @@ const HomeScreen = () => {
           </div>
 
           {/* Confirm Button */}
-          <button className="confirm-button">
+          <button onClick={} className="confirm-button">
             <img
               src="../Components/confirm1.png"
               alt="Confirm Button"
