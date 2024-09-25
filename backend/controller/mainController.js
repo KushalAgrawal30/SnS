@@ -11,10 +11,10 @@ const bodyParser = require('body-parser')
 
 
 const IMGBB_API_KEY = "8a496163927b9d9e0480e2850c8f8047";
-const GOOGLE_API_KEY = "e46eb16e06b86f316f7c4fcb0059c24f949e1cec889d9dcbdfc087f140452d40"
+const GOOGLE_API_KEY = "86c8c71ddb4a335aa4287b3703f534421cb156d0a324333419b3826469195717"
 
 let emailValue;
-
+let prodTitle;
 
 exports.createUser = async (req,res) =>  {
     const data = req.body.userData 
@@ -114,6 +114,26 @@ exports.getImage = async (req,res) => {
               }
           });
          console.log(JSON.stringify(imgBBResponse.data.data.url))
+         
+         const googleLensResults = await new Promise((resolve, reject) => {
+            getJson(
+              {
+                engine: "google_lens",
+                url:imgBBResponse.data.data.url,
+                api_key: GOOGLE_API_KEY,
+              },
+              (json) => {
+                if (json) {
+                  resolve(json.visual_matches[0]);
+                } else {
+                  reject(new Error('No visual matches found in Google Lens.'));
+                }
+              }
+            );
+          });
+         prodTitle = googleLensResults.title
+         console.log(googleLensResults)
+         console.log(prodTitle)
 
      } catch (err) {
          // example to check for a very specific error
@@ -122,5 +142,7 @@ exports.getImage = async (req,res) => {
          res.end(String(err));
          return;
      }    
+
+
 
 }
