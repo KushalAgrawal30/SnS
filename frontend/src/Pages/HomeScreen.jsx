@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './HomeScreen.css';
+import { useNavigate } from 'react-router-dom';
 
 const HomeScreen = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [image, setImage] = useState(null);
   const [isConfirming, setIsConfirming] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -12,6 +15,7 @@ const HomeScreen = () => {
 
   const handleLogout = () => {
     console.log('Logged Out');
+    navigate('/');
   };
 
   const handleImageUpload = (event) => {
