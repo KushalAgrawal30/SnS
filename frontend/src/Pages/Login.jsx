@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,6 +10,17 @@ const Login = () => {
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
+  };
+
+  const handleEmailChange = (e) => {
+    const emailValue = e.target.value;
+    setEmail(emailValue);
+
+    if (!validateEmail(emailValue)) {
+      setError('Invalid Email Address Format');
+    } else {
+      setError('');
+    }
   };
 
   const handlePasswordChange = (e) => {
@@ -25,15 +34,7 @@ const Login = () => {
     }
   };
 
-  const handleEmailChange = (e) => {
-    const emailValue = e.target.value;
-    setEmail(emailValue);
-    if (!validateEmail(emailValue)) {
-      setError('Invalid Email Address Format');
-    } else {
-      setError('');
-    }
-  };
+  
   
 
   const handleSubmit = () => {
@@ -96,6 +97,8 @@ const Login = () => {
       >
         Get Started
       </button>
+      <br />
+      <Link to="./CreateAccount">Create Account Link</Link>
     </>
   );
 };
