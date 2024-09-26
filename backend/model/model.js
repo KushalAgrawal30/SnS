@@ -28,7 +28,8 @@ const LoginSchema = new mongoose.Schema({ //
 
 const UserSchema = new mongoose.Schema({
     email : String,
-    productId : [String],   
+    productName : String, 
+    price : Number  
 })
 
 

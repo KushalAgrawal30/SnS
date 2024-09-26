@@ -14,10 +14,8 @@ app.use(session({
 }));
 
 app.use(express.json());
-app.use(cors({
-  origin: 'http://localhost:3000', // Replace with your actual frontend domain
-  credentials: true  // Allow cookies (credentials) to be sent in CORS requests
-}));
+app.use(cors())
+
 app.set('view engine','ejs')
 app.use(bodyParser.urlencoded({ extended: true }));
 
