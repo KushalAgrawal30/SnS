@@ -1,10 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProductListingPage.css';
+import axios from 'axios';
 
 const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [priceCheck, setPriceCheck] = useState('');
-  
+  const [items, setItems] = useState([]);
+  const [Loading, setLoading] = useState(true);
+  const [Error, setError] = useState(null);
+
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/getData')
+      .then((response) => {
+        console.log("This is the respone",response)
+        setItems(response.data.data);
+      })
+      .catch((error) => {
+        console.error("API fetch failed", error);
+        setError("Failed to load data from API");
+      })
+      .finally(() => {
+        setLoading(false);
+      });;
+  }, []);
+
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -42,6 +62,7 @@ const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }
         </button>
       </div>
             {/* Listings Section */}
+            {items.map((item, index) => (
             <div className="listings-container">
         {/* Example of a listing */}
         <div className="listing">
@@ -50,16 +71,17 @@ const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }
             <img src="/path_to_image/product_image_1.png" alt="Product 1" />
           </div>
           <div className="listing-details">
-            <p>Product Description 1</p>
-            <p>Price: $100</p>
-            <p>Rating: 4.5/5</p>
+            <p>{item.title}</p>
+            <p>{item.price}</p>
+            <p>{item.price}</p>
             <a href="/path_to_listing_1">View Listing</a>
           </div>
         </div>
+      
 
         {/* Additional listings can be added similarly */}
       </div>
-
+    ))}
       {/* Sidebar */}
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <ul>

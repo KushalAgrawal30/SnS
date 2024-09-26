@@ -11,6 +11,9 @@ const HomeScreen = () => {
 
   const navigate = useNavigate();
 
+  const gotoProduct = () => {
+    navigate('/ProductListingPage')
+  }
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -67,7 +70,7 @@ const HomeScreen = () => {
             <img src={image} alt="Preview" className="uploaded-image" />
           </div>
           {/* Confirm Button */}
-          <button className="confirm-button">
+          <button onClick={gotoProduct} className="confirm-button">
             <img
               src="../Components/confirm1.png"
               alt="Confirm Button"

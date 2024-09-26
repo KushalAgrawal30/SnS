@@ -9,7 +9,6 @@ const { Login } = require('../model/model')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 
-
 const IMGBB_API_KEY = "8a496163927b9d9e0480e2850c8f8047";
 const GOOGLE_API_KEY = "86c8c71ddb4a335aa4287b3703f534421cb156d0a324333419b3826469195717"
 
@@ -60,7 +59,13 @@ exports.loginUser = async (req,res) => {
        else{
         if(req.body.password == check.password){
             req.session.loggedIn = true;
-            req.session.username = req.body.email
+            emailValue = req.body.email;
+            req.session.save((err) => {
+                if (err) {
+                    console.log("Session save error", err);
+                    return res.status(500).json({ success: false, message: "Session save error" });
+                }
+            })
             console.log(`Logged in as ${check.email}`)
             res.status(200).json({
                 success : true,
@@ -85,6 +90,7 @@ exports.loginUser = async (req,res) => {
 
 
 exports.getImage = async (req,res) => {
+     console.log(emailValue)
      const form = formidable({});
      let fields;
      let files;
@@ -132,7 +138,6 @@ exports.getImage = async (req,res) => {
             );
           });
          prodTitle = googleLensResults.title
-         console.log(googleLensResults)
          console.log(prodTitle)
 
          const shoppingResults = await new Promise((resolve, reject) => {
@@ -156,6 +161,7 @@ exports.getImage = async (req,res) => {
           const num = []
           for(let i=0;i<5;i++){
             const newProduct = await Product.create({
+                email : emailValue,
                 title : shoppingResults[i].title.slice(0,12),
                 prodURL : shoppingResults[i].link,
                 price : shoppingResults[i].price,
@@ -165,7 +171,6 @@ exports.getImage = async (req,res) => {
           }
           console.log(num)
 
-
      } catch (err) {
          // example to check for a very specific error
          console.error(err);
@@ -173,4 +178,27 @@ exports.getImage = async (req,res) => {
          res.end(String(err));
          return;
      }    
+}
+
+exports.sendData = async (req, res) => {
+    try{
+        const prodData = []
+        let currentId = await Product.find({email : emailValue})
+        for(let i=0;i<5;i++){
+            let x = await Product.findById(currentId[i]._id)
+            prodData.push(x)
+        }
+        console.log(prodData)
+        return res.status(200).json({
+            status : "Success",
+            result : prodData.length,
+            data : prodData
+        })
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            status : "Fail",
+            message: 'server error'
+        })   
+    }
 }
