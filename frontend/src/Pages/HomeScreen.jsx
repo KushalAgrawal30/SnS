@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './HomeScreen.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import topright from '../Components/rightg.png'
 
 const HomeScreen = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -10,6 +11,9 @@ const HomeScreen = () => {
 
   const navigate = useNavigate();
 
+  const gotoProduct = () => {
+    navigate('/ProductListingPage')
+  }
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -66,7 +70,7 @@ const HomeScreen = () => {
             <img src={image} alt="Preview" className="uploaded-image" />
           </div>
           {/* Confirm Button */}
-          <button className="confirm-button">
+          <button onClick={gotoProduct} className="confirm-button">
             <img
               src="../Components/confirm1.png"
               alt="Confirm Button"
@@ -101,7 +105,9 @@ const HomeScreen = () => {
       )}
 
       {/* Top Right Icon */}
-      <button className="top-right-button"></button>
+      <button className="top-right-button">
+        
+      </button>
 
       {/* Left Sidebar Icon */}
       <button className="sidebar-toggle" onClick={handleToggleSidebar}>
