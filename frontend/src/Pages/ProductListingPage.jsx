@@ -29,10 +29,36 @@ const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const handlePriceCheck = () => {
+  const submitPrice = () => {
+    if (priceCheck.length < 6) {
+      console.log(`Enter a Price`);
+      alert(`Enter a Price`);
+      return;
+    }
+    else{
+      fetch('http://localhost:8000/getPrice', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ priceCheck }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            console.log(`Price check set at: ${priceCheck}`);
+            alert(`Price alert set at: ${priceCheck}`);
+          } else {
+            alert(`ERROR`);
+          }
+        })
+        .catch((error) => {
+          alert('An error occurred. Please try again.');
+        });
+    }
     // Function to handle price check and send notification
-    console.log(`Price check set at: ${priceCheck}`);
-    alert(`Price alert set at: ${priceCheck}`);
+    
+
   };
 
   return (
@@ -49,6 +75,7 @@ const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }
         <div className="three-line-icon"></div>
       </button>
 
+
       {/* Search Price Input and Notification Bell */}
       <div className="price-check-container">
         <input
@@ -57,13 +84,15 @@ const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }
           value={priceCheck}
           onChange={(e) => setPriceCheck(e.target.value)}
         />
-        <button className="bell-icon" onClick={handlePriceCheck}>
+        <button className="bell-icon" onClick={submitPrice}>
           <img src="/path_to_bell_icon/bell.png" alt="Set Price Alert" />
         </button>
       </div>
-            {/* Listings Section */}
+
+
+      {/* Listings Section */}
             
-            <div className="listings-container">
+        <div className="listings-container">
         {/* Example of a listing */}
         {items.map((item, index) => (
         <div className="listing">
@@ -73,7 +102,6 @@ const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }
           </div>
           <div className="listing-details">
             <p>{item.title}</p>
-            <p>{item.price}</p>
             <p>{item.price}</p>
             <a href={item.prodURL}>View Listing</a>
           </div>

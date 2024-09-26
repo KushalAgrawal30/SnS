@@ -189,6 +189,10 @@ exports.sendData = async (req, res) => {
             prodData.push(x)
         }
         console.log(prodData)
+
+        const result = await Product.deleteMany({});
+        console.log(result);
+
         return res.status(200).json({
             status : "Success",
             result : prodData.length,
@@ -200,5 +204,23 @@ exports.sendData = async (req, res) => {
             status : "Fail",
             message: 'server error'
         })   
+    }
+
+}
+
+exports.getPrice = async (req,res) => {
+    try{
+        const price = req.body
+        console.log(price)
+        res.status(200).json({
+            success : true,
+            message : "Price Submited"
+        })
+    }catch(err){
+        console.log(err);
+        res.status(400).json({
+            success : false,
+            message : "Error"
+        })
     }
 }
