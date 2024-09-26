@@ -24,7 +24,7 @@ const DataSavedScreen = () => {
   };
 
   const handleTakeAnotherSnap = () => {
-    navigate('/home');
+    navigate('/HomeScreen');
   };
 
   return (

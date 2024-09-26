@@ -51,6 +51,7 @@ const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }
           if (data.success) {
             console.log(`Price check set at: ${priceCheck}`);
             alert(`Price alert set at: ${priceCheck}`);
+            navigate('/DataSavedScreen')
           } else {
             alert(`ERROR`);
           }

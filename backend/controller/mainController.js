@@ -4,7 +4,6 @@ const axios = require('axios');
 const { getJson } = require("serpapi");
 const { Product } = require('../model/model')
 const { User } = require('../model/model')
-const { Notify } = require('../model/model')
 const { Login } = require('../model/model')
 const session = require('express-session')
 const bodyParser = require('body-parser')
@@ -189,7 +188,6 @@ exports.sendData = async (req, res) => {
             prodData.push(x)
         }
         console.log(prodData)
-
         const result = await Product.deleteMany({});
         console.log(result);
 
@@ -211,7 +209,13 @@ exports.sendData = async (req, res) => {
 exports.getPrice = async (req,res) => {
     try{
         const price = req.body
-        console.log(price)
+        console.log(price.priceCheck, prodTitle)
+        const userData = await User.insertMany({
+            email : emailValue,
+            productName : prodTitle,
+            price : price.priceCheck
+        })
+        console.log("Data saved")
         res.status(200).json({
             success : true,
             message : "Price Submited"
