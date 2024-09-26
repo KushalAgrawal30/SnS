@@ -33,7 +33,7 @@ const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }
   };
 
   const submitPrice = () => {
-    if (priceCheck.length < 6) {
+    if (priceCheck.length==0) {
       console.log(`Enter a Price`);
       alert(`Enter a Price`);
       return;
