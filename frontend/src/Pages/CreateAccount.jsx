@@ -87,7 +87,7 @@ const CreateAccount = () => {
       />
       {error && <p className="error-message">{error}</p>}
       <button className="create-account-button" onClick={handleCreateAccount}>
-        <img src="/path_to_svg/create-account.svg" alt="Create Account" />
+        
       </button>
     </div>
   );

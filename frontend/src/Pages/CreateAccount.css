@@ -1,7 +1,7 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #222831;;
-    color: #fff;
+    background-color: #222831;
+    color: rgba(255, 255, 255, 0.6);
     margin: 0;
     padding: 0;
   }
@@ -33,60 +33,73 @@ body {
   }
   
   input {
-    width: 80%;
+    width: 90%; /* Increased input length */
     padding: 15px;
     margin: 10px 0;
     border-radius: 5px;
     border: none;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    background-color: rgba(255, 255, 255, 0.2); /* Reduced opacity */
+    backdrop-filter: blur(5px);
+    color: #fff; /* Input text color */
+  }
+  
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.6); /* Placeholder text color */
   }
   
   .create-account-button {
     margin-top: 20px;
-    width: 200px;
-    height: 70px;
+    width: 250px; /* Adjust button width */
+    height: 80px; /* Adjust button height */
     background-image: url('../Components/button1.png');
     background-size: cover;
-    background-position: center;
+    background-repeat: no-repeat; /* Ensure it doesn't repeat */
+    background-position: center; /* Keep the image centered */
+    background-color: transparent; /* Make sure the button background is transparent */
     border: none;
     cursor: pointer;
+    
   }
   
   .create-account-button:hover {
-    background-image: url('../Components/button2.png');
+    background-image: url('../Components/button2.png'); /* Use hover state for interaction */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+      
   }
   
-  .profile-page {
-    display: flex;
+  
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    input {
+      width: 95%; /* Make input fields wider on smaller screens */
+    }
+  
+    .create-account-heading {
+      font-size: 2.5rem;
+    }
+  
+    .create-account-button {
+      width: 200px;
+      height: 70px;
+    }
   }
   
-  .sidebar {
-    width: 200px;
-    background-color: #111;
-    padding: 20px;
+  @media (max-width: 480px) {
+    input {
+      width: 100%;
+      font-size: 1.1rem; /* Smaller text size for mobile */
+    }
+  
+    .create-account-heading {
+      font-size: 2rem;
+    }
+  
+    .create-account-button {
+      width: 180px;
+      height: 60px;
+    }
   }
   
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    margin: 20px 0;
-    cursor: pointer;
-    color: #fff;
-  }
-  
-  .profile-content {
-    margin-left: 220px;
-    padding: 20px;
-  }
-  
-  h2 {
-    font-family: 'Jersey', sans-serif;
-  }
-  
-  p {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.2rem;
-  }

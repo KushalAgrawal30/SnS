@@ -14,8 +14,7 @@ app.use(session({
 }));
 
 app.use(express.json());
-app.use(cors())
-
+app.use(cors());
 app.set('view engine','ejs')
 app.use(bodyParser.urlencoded({ extended: true }));
 
