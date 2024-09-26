@@ -1,0 +1,93 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+  }
+  
+  .data-saved-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+    color: #fff;
+  }
+  
+  .background-logo {
+    position: absolute;
+    background-image: url('../Components/logo.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  
+  .message-container {
+    text-align: center;
+  }
+  
+  .message-container h1 {
+    font-family: 'Jersey25', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .message-container p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 40px;
+  }
+  
+  .take-snap-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .take-snap-button img {
+    width: 200px;
+    height: auto;
+  }
+  
+  .sidebar-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100vh;
+    background-color: #111;
+    transition: 0.3s ease;
+    z-index: 100;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 50px;
+  }
+  
+  .sidebar li {
+    color: #00ffff;
+    padding: 20px;
+    cursor: pointer;
+  }
+  
+  .sidebar li:hover {
+    background-color: #222;
+  }

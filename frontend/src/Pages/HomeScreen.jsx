@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './HomeScreen.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -8,9 +8,27 @@ const HomeScreen = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [image, setImage] = useState(null);
   const [isConfirming, setIsConfirming] = useState(false);
+  const sidebarRef = useRef(null);
 
   const navigate = useNavigate();
 
+  const handleClickOutside = (event) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      setIsSidebarOpen(false); // Close sidebar
+    }
+  };
+
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSidebarOpen]);
   const gotoProduct = () => {
     navigate('/ProductListingPage')
   }
@@ -80,7 +98,7 @@ const HomeScreen = () => {
 
           {/* Take Another Picture */}
           <p className="retake" onClick={retakePicture}>
-            Take another picture
+            Take another picture    
           </p>
         </div>
       ) : (

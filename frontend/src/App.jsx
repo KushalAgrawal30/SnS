@@ -5,6 +5,7 @@ import Login from './Pages/Login';
 import CreateAccount from './Pages/CreateAccount';
 import ConfirmScreen from './Pages/ConfirmScreen';
 import ProductListingPage from './Pages/ProductListingPage';
+import DataSavedScreen from './Pages/DataSavedScreen';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -19,6 +20,7 @@ function App() {
           <Route path='/HomeScreen' element = {<HomeScreen/>}/>
           <Route path='/ConfirmScreen' element = {<ConfirmScreen/>}/>
           <Route path='/ProductListingPage' element = {<ProductListingPage/>}/>
+          <Route path='/DataSavedScreen' element = {<DataSavedScreen/>}/>
           
         </Routes>
       </Router>
