@@ -55,7 +55,7 @@ h2 {
 .login-button {
     width: 180px;
     height: 70px;
-    background-image: url('../Components/button1.png');
+    background-image: url('../Components/login1.png');
     background-size: cover;
     border: none;
     cursor: pointer;
@@ -64,7 +64,7 @@ h2 {
 }
 
 .login-button:hover {
-    background-image: url('../Components/button2.png');
+    background-image: url('../Components/login2.png');
 }
 
 .create-account {

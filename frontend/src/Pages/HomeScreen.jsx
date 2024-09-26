@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './HomeScreen.css';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
 
 const HomeScreen = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -16,6 +16,7 @@ const HomeScreen = () => {
 
   const handleLogout = () => {
     console.log('Logged Out');
+    navigate('/');
   };
 
   const handleImageUpload = (event) => {
@@ -23,17 +24,17 @@ const HomeScreen = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result);  
+        setImage(reader.result);
         setIsConfirming(true); // Show the confirm screen
       };
       const formdata = new FormData();
       formdata.append('image', file);
       const response = axios.post('http://localhost:8000/upload', formdata, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
-      console.log(response)
+      console.log(response);
       reader.readAsDataURL(file);
     }
   };
@@ -51,9 +52,7 @@ const HomeScreen = () => {
 
   return (
     <div className="home-container">
-      <div className="background-logo">
-        
-      </div>
+      <div className="background-logo"></div>
       <header className="header">
         <h2>Ready to take a snapshot?...</h2>
       </header>
@@ -62,14 +61,10 @@ const HomeScreen = () => {
         <div className="confirm-container">
           <div className="background-logo"></div>
 
-          {/* Top Right Icon to go Home */}
-          
-
           {/* Image Preview */}
           <div className="image-preview">
             <img src={image} alt="Preview" className="uploaded-image" />
           </div>
-
           {/* Confirm Button */}
           <button className="confirm-button">
             <img
@@ -107,12 +102,23 @@ const HomeScreen = () => {
 
       {/* Top Right Icon */}
       <button className="top-right-button">
-        <img src="../Components/topright.png" alt="Home Logo" />
+        
       </button>
 
       {/* Left Sidebar Icon */}
       <button className="sidebar-toggle" onClick={handleToggleSidebar}>
-        <div className="three-line-icon"></div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="30px"
+          height="30px"
+          viewBox="0 0 24 24"
+          fill="#76abae"
+        >
+          <path
+            fill="#76abae"
+            d="M3.75 5.25a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5zm0 6a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5zm0 6a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5z"
+          />
+        </svg>
       </button>
 
       {/* Sidebar */}
