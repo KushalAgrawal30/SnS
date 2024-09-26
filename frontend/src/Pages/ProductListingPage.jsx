@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ProductListingPage.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -8,7 +9,9 @@ const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }
   const [items, setItems] = useState([]);
   const [Loading, setLoading] = useState(true);
   const [Error, setError] = useState(null);
+  const navigate = useNavigate();
 
+  
 
   useEffect(() => {
     axios.get('http://localhost:8000/getData')
@@ -73,7 +76,6 @@ const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }
           </div>
           <div className="listing-details">
             <p>{item.title}</p>
-            <p>{item.price}</p>
             <p>{item.price}</p>
             <a href={item.prodURL}>View Listing</a>
           </div>
