@@ -3,18 +3,18 @@ body {
     margin: 0;
     padding: 0;
     background-color: #111;
-}
-
-.home-container {
+  }
+  
+  .home-container {
     position: relative;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-.background-logo {
+  }
+  
+  .background-logo {
     position: absolute;
     background-image: url('../Components/logo.png');
     background-size: contain;
@@ -26,73 +26,93 @@ body {
     top: 0;
     left: 0;
     z-index: -1;
+  }
+  .header {
+    text-align: center; /* Center the header text */
+    margin-top: 20px; /* Add some margin at the top if needed */
 }
 
 .header h2 {
     font-family: 'Jersey25', sans-serif;
-    font-size: 2.5rem;
+    /* margin-top: 60px; */
+    font-size: 2.5rem; /* Default font size */
     color: #fff;
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; /* Existing margin for spacing below */
+    /* Additional styling can go here */
 }
 
-.take-snap-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-.take-snap-button img.take-snap-initial {
-    width: 20vw; /* Adjust the width based on viewport width */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 180px; /* Ensure the image doesn't get too large on larger screens */
-    content: url('../Components/sanp1.png');
-}
-
-.take-snap-button:hover img.take-snap-initial {
-    content: url('../Components/snap2.png');
-}
-
-/* Optional: Add media queries to handle specific screen sizes for better control */
+/* Responsive font size for the header */
 @media (max-width: 768px) {
-    .take-snap-button img.take-snap-initial {
-        width: 30vw; /* Increase the width for smaller screens */
+    .header h2 {
+        margin-top: 60px;
+        font-size: 2rem; /* Reduce font size for tablets */
+        margin-bottom: 2.5rem; /* Increase margin to give more space */
     }
 }
 
 @media (max-width: 480px) {
-    .take-snap-button img.take-snap-initial {
-        width: 40vw; /* Even larger size for very small screens */
+    .header h2 {
+        margin-top: 60px;
+        font-size: 1.5rem; /* Further reduce font size for mobile devices */
+        margin-bottom: 1.5rem; /* Adjust margin for mobile */
     }
 }
 
-/* Top Right Button */
-.top-right-button {
+
+  
+  .take-snap-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .take-snap-button img.take-snap-initial {
+    width: 20vw; /* Adjust the width based on viewport width */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 180px; /* Ensure the image doesn't get too large on larger screens */
+    content: url('../Components/sanp1.png');
+  }
+  
+  .take-snap-button:hover img.take-snap-initial {
+    content: url('../Components/snap2.png');
+  }
+  
+  @media (max-width: 768px) {
+    .take-snap-button img.take-snap-initial {
+      width: 30vw; /* Increase the width for smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .take-snap-button img.take-snap-initial {
+      width: 40vw; /* Even larger size for very small screens */
+    }
+  }
+  
+  .top-right-button {
     position: absolute;
     top: 20px;
     right: 20px;
-    width: 30px;  /* Button width */
+    width: 30px; /* Button width */
     height: 30px; /* Button height */
     border: none; /* No border */
-    
     background-image: url('../Components/rightg.png'); /* Path to the image */
     background-size: contain; /* Ensure the image scales properly */
     background-repeat: no-repeat; /* Prevent image from repeating */
     background-position: center; /* Center the image within the button */
     cursor: pointer; /* Show pointer on hover */
     z-index: 9999; /* Make sure the button is on top of other elements */
-}
-
-.sidebar-toggle {
+  }
+  .sidebar-toggle {
     position: absolute;
     top: 20px;
-    
     background: none;
     border: none;
     cursor: pointer;
     padding-left: 20px;
-}
-
-.sidebar {
+  }
+  
+  .sidebar {
     position: fixed;
     top: 0;
     left: -250px;
@@ -101,44 +121,124 @@ body {
     background-color: #111;
     transition: 0.3s ease;
     z-index: 100;
-}
-
-.sidebar.open {
+  }
+  
+  .sidebar.open {
     left: 0;
-}
-
-.sidebar ul {
+  }
+  
+  .sidebar ul {
     list-style: none;
     padding: 0;
     margin-top: 50px;
-}
-
-.sidebar li {
+  }
+  
+  .sidebar li {
     color: #00ffff;
     padding: 20px;
     cursor: pointer;
-}
-
-.sidebar li:hover {
+  }
+  
+  .sidebar li:hover {
     background-color: #222;
-}
-
-.confirm-container {
+  }
+  
+  /* Confirm Container */
+  .confirm-container {
     position: relative;
-}
-
-.image-preview {
-    width: 100%;
-    height: 300px;
+  }
+  
+  .image-preview {
+    width: 80%; /* Make it responsive based on the width of the viewport */
+    max-width: 600px; /* Limit the maximum width */
+    height: auto; /* Let the height adjust automatically */
+    min-height: 300px; /* Set a minimum height for small screens */
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px dashed #ccc;
-}
-
-.image-preview img {
+    border: 2px dashed #cce;
+  }
+  
+  .image-preview img {
     max-width: 100%;
     max-height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Ensures the image covers the area while maintaining aspect ratio */
+  }
+  
+  @media (max-width: 768px) {
+    .image-preview {
+      width: 90%; /* Increase width for smaller screens */
+      min-height: 250px; /* Adjust minimum height */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .image-preview {
+      width: 95%; /* Even larger width for mobile devices */
+      min-height: 200px; /* Reduce minimum height */
+    }
+  }
+  /* Confirm Button Styles */
+/* Confirm Button Styles */
+.confirm-button {
+    padding: 4px 8px; /* Reduced padding for a smaller button */
+    font-size: 0.75rem; /* Smaller font size */
+    color: #fff; /* Text color */
+    
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    margin-top: 10px; /* Space above the button */
+    display: flex; /* Allow for centering */
+    align-items: center; /* Center image vertically */
+    justify-content: center; /* Center image horizontally */
+}
+
+/* Button hover effect */
+.confirm-button:hover {
+    
+}
+
+/* Confirm Button Image Styles */
+.confirm-initial {
+    width: 20px; /* Smaller image size */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Responsive styles for confirm button */
+@media (max-width: 768px) {
+    .confirm-button {
+        font-size: 0.65rem; /* Smaller text on smaller screens */
+        padding: 4px 6px; /* Adjust padding */
+    }
+
+    .confirm-initial {
+        width: 16px; /* Even smaller image for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .confirm-button {
+        font-size: 0.55rem; /* Further reduce font size for very small screens */
+        padding: 3px 5px; /* Further adjust padding */
+    }
+
+    .confirm-initial {
+        width: 14px; /* Smaller image for mobile devices */
+    }
+}
+
+/* General styling for image preview */
+.image-preview {
+    width: 80%; /* Make it responsive based on the width of the viewport */
+    max-width: 600px; /* Limit the maximum width */
+    height: auto; /* Let the height adjust automatically */
+    min-height: 300px; /* Set a minimum height for small screens */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #cce;
 }
