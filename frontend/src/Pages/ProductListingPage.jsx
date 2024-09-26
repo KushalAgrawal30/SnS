@@ -62,26 +62,27 @@ const ProductListingPage = ({ goToHome, goToHistory, goToProfile, handleLogout }
         </button>
       </div>
             {/* Listings Section */}
-            {items.map((item, index) => (
+            
             <div className="listings-container">
         {/* Example of a listing */}
+        {items.map((item, index) => (
         <div className="listing">
           <div className="listing-image">
             {/* Placeholder for product image */}
-            <img src="/path_to_image/product_image_1.png" alt="Product 1" />
+            <img src={item.imgUrl} alt="Product 1" />
           </div>
           <div className="listing-details">
             <p>{item.title}</p>
             <p>{item.price}</p>
             <p>{item.price}</p>
-            <a href="/path_to_listing_1">View Listing</a>
+            <a href={item.prodURL}>View Listing</a>
           </div>
         </div>
+        ))}
       
 
         {/* Additional listings can be added similarly */}
       </div>
-    ))}
       {/* Sidebar */}
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <ul>
